@@ -1,0 +1,148 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.status-pills {
+  display: flex;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.pill {
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+.pill-active {
+  background: var(--accent);
+  color: white;
+}
+
+.search-input {
+  flex: 1 1 160px;
+  min-width: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+.sort-select {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+.new-ticket-btn {
+  margin-bottom: 18px;
+}
+
+.new-ticket-form {
+  margin-bottom: 22px;
+  gap: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+}
+.form-row .field {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.ticket-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ticket-link {
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.15s ease;
+}
+.ticket-link:hover {
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(27, 36, 48, 0.08), 0 8px 20px rgba(27, 36, 48, 0.08);
+  transform: translateY(-1px);
+}
+
+.ticket-main-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ticket-main-row input[type='checkbox'] {
+  margin-top: 3px;
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.ticket-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding-right: 56px; /* keep clear of the priority stamp */
+}
+.ticket-title.strike {
+  text-decoration: line-through;
+  color: var(--ink-soft);
+}
+
+.ticket-description {
+  margin: 0 0 0 27px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ticket-meta-row {
+  margin-left: 27px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+}

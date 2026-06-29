@@ -1,0 +1,57 @@
+[
+  {
+    "id": "8f14e45f-ceea-4d8f-b69a-0fc7cf3b5a01",
+    "title": "Set up project repository",
+    "description": "Initialize git, push the scaffolded backend and frontend, and add a README.",
+    "completed": true,
+    "priority": "high",
+    "dueDate": "2026-06-20",
+    "tags": [
+      "setup",
+      "git"
+    ],
+    "createdAt": "2026-06-18T09:00:00.000Z",
+    "updatedAt": "2026-06-20T10:30:00.000Z"
+  },
+  {
+    "id": "2c6a9b3e-1f4d-4a2b-8e3c-7d4f5a6b7c02",
+    "title": "Design the todo data model",
+    "description": "Decide on fields: title, description, priority, dueDate, tags, completed.",
+    "completed": true,
+    "priority": "medium",
+    "dueDate": "2026-06-21",
+    "tags": [
+      "design",
+      "backend"
+    ],
+    "createdAt": "2026-06-19T11:15:00.000Z",
+    "updatedAt": "2026-06-21T14:00:00.000Z"
+  },
+  {
+    "id": "5d8c1a2b-3e4f-4a5b-9c6d-7e8f9a0b1c03",
+    "title": "Build the todo detail page",
+    "description": "Single todo view, reads ?id= from the URL, supports inline editing.",
+    "completed": false,
+    "priority": "high",
+    "dueDate": "2026-06-28",
+    "tags": [
+      "frontend",
+      "react"
+    ],
+    "createdAt": "2026-06-22T08:45:00.000Z",
+    "updatedAt": "2026-06-22T08:45:00.000Z"
+  },
+  {
+    "id": "9a1b2c3d-4e5f-4061-8273-849596a7b804",
+    "title": "Write API documentation",
+    "description": "Document every endpoint with example requests and responses in docs/API.md.",
+    "completed": false,
+    "priority": "low",
+    "dueDate": null,
+    "tags": [
+      "docs"
+    ],
+    "createdAt": "2026-06-23T16:20:00.000Z",
+    "updatedAt": "2026-06-23T16:20:00.000Z"
+  }
+]

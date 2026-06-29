@@ -1,0 +1,301 @@
+/* ==========================================================================
+   Design tokens
+   A "ticket stub" motif: every todo is rendered like a perforated ticket —
+   a priority-colored spine, a dashed tear-line, a postage-style priority
+   stamp, and a monospaced footer (id / dates) like a barcode strip.
+   ========================================================================== */
+:root {
+  --paper: #f1f3f0;
+  --card: #ffffff;
+  --ink: #1b2430;
+  --ink-soft: #4d5666;
+  --line: #d8d9d2;
+
+  --accent: #3f6f52; /* pine — primary actions */
+  --accent-dark: #2f5a40;
+  --rust: #b6492f; /* high priority / overdue */
+  --amber: #c98a2c; /* medium priority */
+  --slate: #5d7a8c; /* low priority */
+  --sage: #6f8f73; /* completed */
+
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(27, 36, 48, 0.06), 0 4px 14px rgba(27, 36, 48, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-body);
+}
+
+/* Visible keyboard focus everywhere — accessibility floor */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ==========================================================================
+   Layout shell
+   ========================================================================== */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.1rem;
+  margin: 4px 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.page-subtitle {
+  color: var(--ink-soft);
+  margin: 0 0 28px;
+}
+
+/* ==========================================================================
+   Ticket card — the signature element, shared by list + detail views
+   ========================================================================== */
+.ticket {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 18px 14px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.ticket::before {
+  /* priority spine */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--spine-color, var(--slate));
+}
+
+.ticket.priority-high {
+  --spine-color: var(--rust);
+}
+.ticket.priority-medium {
+  --spine-color: var(--amber);
+}
+.ticket.priority-low {
+  --spine-color: var(--slate);
+}
+.ticket.is-completed {
+  --spine-color: var(--sage);
+  opacity: 0.72;
+}
+
+.ticket-stamp {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border: 1.5px solid var(--spine-color, var(--slate));
+  color: var(--spine-color, var(--slate));
+  border-radius: 4px;
+  transform: rotate(3deg);
+  background: var(--card);
+}
+
+.ticket-footer {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--slate);
+  flex-wrap: wrap;
+}
+
+.tag-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.due-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.due-date.overdue {
+  color: var(--rust);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.btn-danger {
+  background: transparent;
+  border-color: var(--rust);
+  color: var(--rust);
+}
+.btn-danger:hover {
+  background: var(--rust);
+  color: white;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12.5px;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.field input,
+.field textarea,
+.field select {
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--ink);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 64px;
+}
+.field-error {
+  color: var(--rust);
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   States
+   ========================================================================== */
+.empty-state,
+.loading-state,
+.error-banner {
+  font-family: var(--font-body);
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--ink-soft);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+.error-banner {
+  color: var(--rust);
+  border-color: var(--rust);
+  text-align: left;
+}

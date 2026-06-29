@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Q5 — Three-box layout: Flexbox vs Grid vs Float</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #1B2430;
+  }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.1rem; margin-top: 2.5rem; border-bottom: 1px solid #D8D9D2; padding-bottom: 6px; }
+  p.hint { color: #5D7A8C; font-size: 0.9rem; }
+  code { background: #F1F3F0; padding: 2px 5px; border-radius: 3px; }
+
+  /* shared box look so the layout mechanism is the only thing being compared */
+  .demo-box { padding: 10px; color: white; font-size: 0.85rem; white-space: nowrap; }
+  .left  { background: #3F6F52; }
+  .right { background: #B6492F; }
+  .middle { background: #C98A2C; }
+
+  /* ---------- Approach 1: Flexbox ---------- */
+  #container-flex {
+    display: flex;
+    width: 100%;
+    border: 2px dashed #5D7A8C;
+    box-sizing: border-box;
+  }
+  #container-flex .fixed {
+    flex: 0 0 100px;
+    box-sizing: border-box;
+  }
+  #container-flex .expanding {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+  }
+
+  /* ---------- Approach 2: Grid ---------- */
+  #container-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    width: 100%;
+    border: 2px dashed #5D7A8C;
+    box-sizing: border-box;
+  }
+  #container-grid .demo-box {
+    min-width: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* ---------- Approach 3: Float + calc ---------- */
+  #container-float {
+    width: 100%;
+    overflow: hidden; /* clearfix */
+    border: 2px dashed #5D7A8C;
+    box-sizing: border-box;
+  }
+  #container-float .left {
+    float: left;
+    width: 100px;
+    box-sizing: border-box;
+  }
+  #container-float .right {
+    float: right;
+    width: 100px;
+    box-sizing: border-box;
+  }
+  #container-float .middle {
+    width: calc(100% - 200px);
+    margin-left: 100px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+
+  <h1>Question 5 — Resize the browser window to see each layout reflow</h1>
+  <p class="hint">Left/right boxes stay pinned at exactly 100px in all three approaches. The middle box always claims whatever space is left, and never overlaps its neighbors.</p>
+
+  <h2>Approach 1 — Flexbox (recommended)</h2>
+  <div id="container-flex">
+    <div class="demo-box fixed left">left · 100px</div>
+    <div class="demo-box expanding middle">middle · expands to fill remaining width</div>
+    <div class="demo-box fixed right">right · 100px</div>
+  </div>
+
+  <h2>Approach 2 — CSS Grid</h2>
+  <div id="container-grid">
+    <div class="demo-box left">left · 100px</div>
+    <div class="demo-box middle">middle · 1fr (fills remaining width)</div>
+    <div class="demo-box right">right · 100px</div>
+  </div>
+
+  <h2>Approach 3 — Float + calc() (legacy)</h2>
+  <div id="container-float">
+    <div class="demo-box left">left · 100px</div>
+    <div class="demo-box right">right · 100px</div>
+    <div class="demo-box middle">middle · calc(100% - 200px)</div>
+  </div>
+
+</body>
+</html>
